@@ -33,6 +33,12 @@
 //
 // **v1.2 24.04.30 Updated**
 // 1) Section shortcut list의 페이지 이름이 숫자로 시작할 경우 들여쓰기를 적용하여 가독성 강화
+//
+// **v1.3 24.08.20 Updated**
+// 1) Section shortcut list를 생성하는 조건 중 'index' 제거하고 '목차'로 수정
+//
+// **v1.4 24.09.02 Updated**
+// 1) Ctrl+F 기능 사용을 위해 기본 F키로 작동하던 Sidebar 접기 기능 방지 처리
 // ---------------------------------------------------------
 
 console.log('%cMeaXure-Tamperer (c) 2022 BOEUNDE. All rights reserved.','font-size: 17px'); 
@@ -691,7 +697,7 @@ window.addEventListener('load', function() {
     const pictureElements = document.querySelectorAll('picture');
     pictureElements.forEach(pictureElement => {
         const dataName = pictureElement.getAttribute('data-name');
-        if (dataName && (dataName.toLowerCase().includes('cover') || dataName.toLowerCase().includes('history') || dataName.toLowerCase().includes('index'))) {
+        if (dataName && (dataName.toLowerCase().includes('cover') || dataName.toLowerCase().includes('history') || dataName.toLowerCase().includes('목차'))) {
             const liElement = pictureElement.parentElement;
             if (dataName.toLowerCase().includes('history')) {
                 lastHistoryParent = liElement;
@@ -746,5 +752,14 @@ window.addEventListener('load', function() {
         if (!isNaN(parseInt(firstChar))) {
             link.classList.add('indent');
         }
+    }
+});
+
+
+//// Prevent F Key
+window.addEventListener('DOMContentLoaded', function() {
+    let slidebox = document.querySelector('.slidebox[title*="Keyboard shortcut: f"]');
+    if (slidebox) {
+        slidebox.remove();
     }
 });
